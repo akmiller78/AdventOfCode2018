@@ -2,9 +2,7 @@
   (:require [clojure.java.io :as io]
             [clojure.string :as str]))
 
-
 (def frequency-input-file "frequency_input.txt")
-
 
 (defn get-frequencies
   [file-name]
@@ -14,11 +12,9 @@
        str/split-lines
        (map read-string)))
 
-
 (defn total-frequencies
   [frequencies]
-  (reduce + 0 frequencies))
-
+  (reduce + frequencies))
 
 (defn first-repeated-frequency
   [frequencies]
@@ -30,22 +26,10 @@
         frequency
         (recur (rest input) frequency (conj seen frequency))))))
 
-
 (defn goal-one
   []
   (total-frequencies (get-frequencies frequency-input-file)))
 
-
 (defn goal-two
   []
   (first-repeated-frequency (get-frequencies frequency-input-file)))
-
-
-
-(comment
-
-  (goal-one)
-
-  (goal-two)
-
-  )
