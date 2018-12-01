@@ -4,7 +4,7 @@
 
 (def frequency-input-file "frequency_input.txt")
 
-(defn get-frequencies
+(defn get-data
   [file-name]
   (->> file-name
        io/resource
@@ -28,8 +28,8 @@
 
 (defn goal-one
   []
-  (total-frequencies (get-frequencies frequency-input-file)))
+  (total-frequencies (get-data frequency-input-file)))
 
 (defn goal-two
   []
-  (first-repeated-frequency (get-frequencies frequency-input-file)))
+  (first-repeated-frequency (get-data frequency-input-file)))
