@@ -49,18 +49,3 @@
   (goal-two)
 
   )
-
-(comment
-
-  (def data (get-frequencies frequency-input-file))
-
-  (loop [input (cycle data)
-         frequency 0
-         seen #{}]
-    (let [frequency (+ frequency (first input))]
-      (if (contains? seen frequency)
-        frequency
-        (recur (rest input) frequency (conj seen frequency)))))
-
-
-  )
