@@ -18,15 +18,13 @@
 (defn get-claim-info
   [input]
   (->> input
-       (map (fn [claim-str]
-              (let [parts (str/split claim-str #"#|@|,|:|x")
-                    claim-no (parse-int (get parts 1))
-                    x1 (parse-int (get parts 2))
-                    y1 (parse-int (get parts 3))
-                    x2 (- (+ x1 (parse-int (get parts 4))) 0)
-                    y2 (- (+ y1 (parse-int (get parts 5))) 0)]
-                {:claim claim-no
-                 :coords [[x1 y1] [x2 y2]]})))))
+       (map #(let [[claim-no x1 y1 x2 y2]
+                   (->> %
+                        (re-find #"#(\d+) @ (\d+),(\d+): (\d+)x(\d+)")
+                        rest
+                        (map parse-int))]
+               {:claim claim-no
+                :coords [[x1 y1] [x2 y2]]}))))
 
 (defn get-fabric
   [size]
