@@ -67,11 +67,9 @@
          (filter #(> % 1))
          count)))
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Part Two
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (defn- get-indices
   [v]
   (->> v
@@ -96,8 +94,6 @@
                  (let [indices (get-claim-indices board-width c)]
                    (when (clojure.set/subset? indices single-claim-indices)
                      c)))))))
-
-
 
 (comment
 
