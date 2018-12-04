@@ -48,8 +48,6 @@
        first
        :id))
 
-(most-minutes-slept sleep-log)
-
 (defn longest-minute-slept
   [sleep-log guard]
   (->> sleep-log
