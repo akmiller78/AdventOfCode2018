@@ -32,10 +32,7 @@
 
 (defn- mark-row
   [fabric start-idx end-idx]
-  (reduce
-   #(update %1 %2 inc)
-   fabric
-   (range start-idx end-idx)))
+  (reduce #(update %1 %2 inc) fabric (range start-idx end-idx)))
 
 (defn- mark-fabric
   [fabric width [[x1 y1][x2 y2]]]
@@ -63,18 +60,14 @@
 (defn get-claimed-square-inches
   [input board-width]
   (let [claimed (get-claimed input board-width)]
-    (->> claimed
-         (filter #(> % 1))
-         count)))
+    (->> claimed (filter #(> % 1)) count)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Part Two
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn- get-indices
   [v]
-  (->> v
-       (keep-indexed #(when (= 1 %2) %1))
-       set))
+  (->> v (keep-indexed #(when (= 1 %2) %1)) set))
 
 (defn- get-claim-indices
   [width claim]
