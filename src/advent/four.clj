@@ -66,20 +66,6 @@
        (take 1)
        first))
 
-(longest-minute-slept sleep-log "1993")
-
-(def ids (distinct (map first sleep-log)))
-ids
-
-(reverse
- (sort-by :time
-          (map (fn [id]
-                 (let [minute (longest-minute-slept sleep-log id)]
-                   {:guard id
-                    :minute (first minute)
-                    :time (last minute)}))
-               ids)))
-
 (defn solve-1
   []
   (let [guard (most-minutes-slept sleep-log)
