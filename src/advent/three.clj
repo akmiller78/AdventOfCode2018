@@ -24,7 +24,7 @@
                         rest
                         (map parse-int))]
                {:claim claim-no
-                :coords [[x1 y1] [x2 y2]]}))))
+                :coords [[x1 y1] [(+ x1 x2) (+ y1 y2)]]}))))
 
 (defn get-fabric
   [size]
@@ -77,10 +77,17 @@
        set))
 
 (defn- get-claim-indices
-  [board-width claim]
-  (let [fabric (-> (get-fabric (* board-width board-width))
-                   (mark-fabric board-width (:coords claim)))]
-    (get-indices fabric)))
+  [width claim]
+  (let [[[x1 y1][x2 y2]] (:coords claim)
+        start-row y1
+        end-row y2]
+    (reduce
+     (fn [indices row]
+       (let [start-idx (location-1d width [x1 row])
+             end-idx (location-1d width [x2 row])]
+         (apply conj indices (range start-idx end-idx))))
+     #{}
+     (range start-row end-row))))
 
 (defn find-non-repeated-claims
   [input board-width]
@@ -104,10 +111,14 @@
      "#4 @ 1,3: 2x1"
      "#5 @ 0,0: 4x3"])
 
-  (get-claim-info test-input)
+  (def c (second (get-claim-info test-input)))
+
+  (get-claim-indices 8 c)
 
   (get-claimed-square-inches test-input 8)
 
-  (get-claimed-square-inches input 1000)
+  (time (get-claimed-square-inches input 1000))
+
+  (time (find-non-repeated-claims input 1000))
 
   )
