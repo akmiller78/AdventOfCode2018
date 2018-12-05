@@ -3,7 +3,7 @@
             [clojure.string :as str]))
 
 (def raw (-> "polymer.txt" io/resource slurp str/trim))
-(def data (map (comp int char) raw))
+(def data (map int raw))
 
 (defn opposite-polarity? [b1 b2]
   (if (or (nil? b1) (nil? b2))
