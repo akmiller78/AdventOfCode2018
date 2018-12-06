@@ -6,7 +6,7 @@
 (def data (map int raw))
 
 (defn opposite-polarity? [b1 b2]
-  (if (or (nil? b1) (nil? b2))
+  (if (nil? b1)
     false
     (and (not= b1 b2)
          (== (bit-clear b1 5) (bit-clear b2 5)))))
